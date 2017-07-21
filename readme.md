@@ -9,15 +9,15 @@ bx cs init
 
 ```
 bx cr login
-docker build -t <registry>/bmxbillingreport:latest .
-docker push <registry>/bmxbillingreport:latest
+docker build -t <registry>/baremetal-config-report:latest .
+docker push <registry>/baremetal-config-report:latest
 bx cr images
 ```
 
 
 ## Verify Kubernetes Cluster
 ```
-bx cs cluster-config kubetest
+bx cs cluster-config <<your Kubernetes Cluster Name>>
 kubectl get nodes
 kubectl proxy&
 ```
