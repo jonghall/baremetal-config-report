@@ -24,7 +24,7 @@ kubectl proxy&
 
 _Go to http://127.0.0.1:8001/ui_
 
-##Create Service & Define ingress point (modify myingress.yaml to include your host & secretName)
+## Create Service & Define ingress point (modify myingress.yaml to include your host & secretName)
 ```
 kubectl apply -f baremetal-config-report-service.yaml
 kubectl apply -f baremetal-config-report-ingress.yaml
@@ -32,7 +32,7 @@ kubectl get svc
 ```
 
 
-##Deploy Application to Kubernetes Cluster
+## Deploy Application to Kubernetes Cluster
 ```
 kubectl create -f baremetal-config-report-deployment.yaml
 kubectl get nodes

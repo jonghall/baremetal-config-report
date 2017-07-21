@@ -4,7 +4,7 @@ metadata:
   name: kubetest-ingress
   namespace: default
   annotations:
-    nginx.com/sticky-cookie-services: "serviceName=bmx-billing-report-service srv_id expires=1h path=/bmxbillingreport;serviceName=iaas-compliance-report-service srv_id expires=2h path=/iaascompliancereport"
+    nginx.com/sticky-cookie-services: "serviceName=bmx-billing-report-service srv_id expires=1h path=/bmxbillingreport;serviceName=iaas-compliance-report-service srv_id expires=2h path=/baremetal-config-report"
 
 spec:
   tls:
@@ -15,9 +15,9 @@ spec:
   - host: kubetest.us-south.containers.mybluemix.net
     http:
       paths:
-      - path: /iaascompliancereport
+      - path: /baremetal-config-report
         backend:
-          serviceName: iaas-compliance-report-service
+          serviceName: baremetal-config-report-service
           servicePort: 5000
       - path: /bmxbillingreport
         backend:

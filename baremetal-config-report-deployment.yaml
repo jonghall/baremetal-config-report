@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: iaas-compliance-report-deployment
+  name: baremetal-config-report-deployment
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        app: iaas-compliance-report
+        app: baremetal-config-report
     spec:
       containers:
-      - name: iaas-compliance-report
-        image: registry.ng.bluemix.net/jonhall/iaascompliancereport:latest
+      - name: baremetal-config-report
+        image: registry.ng.bluemix.net/jonhall/baremetal-config-report:latest
         ports:
         - containerPort: 5000
