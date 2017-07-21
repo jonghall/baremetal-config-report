@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: iaas-compliance-report-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: iaas-compliance-report
+    spec:
+      containers:
+      - name: iaas-compliance-report
+        image: registry.ng.bluemix.net/jonhall/iaascompliancereport:latest
+        ports:
+        - containerPort: 5000

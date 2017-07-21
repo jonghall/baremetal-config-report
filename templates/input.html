@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <h2>Credentials</h2>
+  <form action="{{ url_for('baremetal-config-report.runReport') }}" method=post>
+    <dl>
+      <dt>Username:
+      <dd><input type=text name=username>
+      <dt>apiKey:
+      <dd><input type=text name=apiKey><br>
+      <dd><input type=submit value="Submit">
+    </dl>
+  </form>
+{% endblock %}

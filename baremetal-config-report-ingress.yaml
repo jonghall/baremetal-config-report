@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kubetest-ingress
+  namespace: default
+  annotations:
+    nginx.com/sticky-cookie-services: "serviceName=bmx-billing-report-service srv_id expires=1h path=/bmxbillingreport;serviceName=iaas-compliance-report-service srv_id expires=2h path=/iaascompliancereport"
+
+spec:
+  tls:
+    - hosts:
+      - kubetest.us-south.containers.mybluemix.net
+      secretName: kubetest
+  rules:
+  - host: kubetest.us-south.containers.mybluemix.net
+    http:
+      paths:
+      - path: /iaascompliancereport
+        backend:
+          serviceName: iaas-compliance-report-service
+          servicePort: 5000
+      - path: /bmxbillingreport
+        backend:
+          serviceName: bmx-billing-report-service
+          servicePort: 5000
