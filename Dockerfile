@@ -10,4 +10,4 @@ EXPOSE 5000
 COPY . .
 
 CMD export FLASK_DEBUG=1
-CMD python IaaSComplianceReport.py
+CMD python baremetal-config-report.py
