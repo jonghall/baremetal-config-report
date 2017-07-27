@@ -1,146 +1,149 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    <br><br><br>
+    <CENTER><h1>Baremetal Configuration Report</h1></CENTER>
     {% for entry in output %}
-        <br>
-        <br>
-        <h2>
-        __________________________________________________________________________________________________________________<br/>
-        <br>
-        Hostname        : {{entry['fullyQualifiedDomainName']}}<br>
-        Datacenter      : {{entry['datacenterName']}}<br>
-        Serial #        : {{entry['manufacturerSerialNumber']}}<br>
-        __________________________________________________________________________________________________________________<br/>
-        </h2>
-        <br>
-        <h3>FRONTEND NETWORK</h3>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title" >
+                        Hostname        : {{entry['fullyQualifiedDomainName']}}<br>
+                        Datacenter      : {{entry['datacenterName']}}<br>
+                        Serial #        : {{entry['manufacturerSerialNumber']}}<br>
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <h3>HARDWARE DETAILS</h3>
+                    <table class="table table-striped table-bordered"><thead>
+                    <th>Type</th>
+                    <th>Manufacturer</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Modify Date</th>
+                    <th>Serial Number</th>
+                    </thead>
+                        {% for row in entry['hardware_data'] %}
+                            <tr>
+                            <td>{{row['devicetype']}}</td>
+                            <td>{{row['manufacturer']}}</td>
+                            <td>{{row['name']}}</td>
+                            <td>{{row['description']}}</td>
+                            <td>{{row['modifydate']}}</td>
+                            <td>{{row['serialnumber']}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table><br>
+                    <h3>FRONTEND NETWORK</h3>
+                    <table class="table table-striped table-bordered"><thead>
+                    <th>Interface</th>
+                    <th>MAC</th>
+                    <th>IpAddress</th>
+                    <th>speed</th>
+                    <th>status</th>
+                    <th>Vlan</th>
+                    <th>Vlan Name</th>
+                    <th>Switch</th>
+                    <th>Router</th>
+                    <th>Manufacturer</th>
+                    <th>RouterIP</th>
+                    </thead>
+                        {% for row in entry['frontend_data'] %}
+                            <tr>
+                            <td>{{row['interface']}}</td>
+                            <td>{{row['mac']}}</td>
+                            <td>{{row['primaryIpAddress']}}</td>
+                            <td>{{row['speed']}}</td>
+                            <td>{{row['status']}}</td>
+                            <td>{{row['vlan']}}</td>
+                            <td>{{row['vlanName']}}</td>
+                            <td>{{row['switch']}}</td>
+                            <td>{{row['router']}}</td>
+                            <td>{{row['router_mfg']}}</td>
+                            <td>{{row['router_ip']}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                  <h3>BACKEND NETWORK</h3>
+                    <table class="table table-striped table-bordered"><thead>
+                    <th>Interface</th>
+                    <th>MAC</th>
+                    <th>IpAddress</th>
+                    <th>speed</th>
+                    <th>status</th>
+                    <th>Vlan</th>
+                    <th>Vlan Name</th>
+                    <th>Switch</th>
+                    <th>Router</th>
+                    <th>Manufacturer</th>
+                    <th>RouterIP</th>
+                    </thead>
+                        {% for row in entry['backend_data'] %}
+                            <tr>
+                            <td>{{row['interface']}}</td>
+                            <td>{{row['mac']}}</td>
+                            <td>{{row['primaryIpAddress']}}</td>
+                            <td>{{row['speed']}}</td>
+                            <td>{{row['status']}}</td>
+                            <td>{{row['vlan']}}</td>
+                            <td>{{row['vlanName']}}</td>
+                            <td>{{row['switch']}}</td>
+                            <td>{{row['router']}}</td>
+                            <td>{{row['router_mfg']}}</td>
+                            <td>{{row['router_ip']}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                    <h3>MANAGEMENT IPMI NETWORK</h3>
+                    <table class="table table-striped table-bordered"><thead>
+                    <th>MAC</th>
+                    <th>IpAddress</th>
+                    <th>speed</th>
+                    <th>status</th>
+                    <th>Vlan</th>
+                    <th>Vlan Name</th>
+                    <th>Switch</th>
+                    <th>Router</th>
+                    <th>Manufacturer</th>
+                    <th>RouterIP</th>
+                    </thead>
+                       {% for row in entry['mgmt_data'] %}
+                            <tr>
+                            <td>{{row['mac']}}</td>
+                            <td>{{row['primaryIpAddress']}}</td>
+                            <td>{{row['speed']}}</td>
+                            <td>{{row['status']}}</td>
+                            <td>{{row['vlan']}}</td>
+                            <td>{{row['vlanName']}}</td>
+                            <td>{{row['switch']}}</td>
+                            <td>{{row['router']}}</td>
+                            <td>{{row['router_mfg']}}</td>
+                            <td>{{row['router_ip']}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                  <h3>TRUNKED VLANS BY INTERFACE</h3>
+                    <table class="table table-striped table-bordered"><thead>
+                    <th>Interface</th>
+                    <th>Vlan #</th>
+                    <th>VlanName</th>
+                    </thead>
+                        {% for row in entry['trunkdata'] %}
+                            <tr>
+                            <td>{{row['interface']}}</td>
+                            <td>{{row['vlanNumber']}}</td>
+                            <td>{{row['vlanName']}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
 
-        <table><thead>
-        <th>Interface</th>
-        <th>MAC</th>
-        <th>IpAddress</th>
-        <th>speed</th>
-        <th>status</th>
-        <th>Vlan</th>
-        <th>Vlan Name</th>
-        <th>Switch</th>
-        <th>Router</th>
-        <th>Manufacturer</th>
-        <th>RouterIP</th>
-        </thead>
-            {% for row in entry['frontend_data'] %}
-                <tr>
-                <td>{{row['interface']}}</td>
-                <td>{{row['mac']}}</td>
-                <td>{{row['primaryIpAddress']}}</td>
-                <td>{{row['speed']}}</td>
-                <td>{{row['status']}}</td>
-                <td>{{row['vlan']}}</td>
-                <td>{{row['vlanName']}}</td>
-                <td>{{row['switch']}}</td>
-                <td>{{row['router']}}</td>
-                <td>{{row['router_mfg']}}</td>
-                <td>{{row['router_ip']}}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <br>
-      <h3>BACKEND NETWORK</h3>
-        <table><thead>
-        <th>Interface</th>
-        <th>MAC</th>
-        <th>IpAddress</th>
-        <th>speed</th>
-        <th>status</th>
-        <th>Vlan</th>
-        <th>Vlan Name</th>
-        <th>Switch</th>
-        <th>Router</th>
-        <th>Manufacturer</th>
-        <th>RouterIP</th>
-        </thead>
-            {% for row in entry['backend_data'] %}
-                <tr>
-                <td>{{row['interface']}}</td>
-                <td>{{row['mac']}}</td>
-                <td>{{row['primaryIpAddress']}}</td>
-                <td>{{row['speed']}}</td>
-                <td>{{row['status']}}</td>
-                <td>{{row['vlan']}}</td>
-                <td>{{row['vlanName']}}</td>
-                <td>{{row['switch']}}</td>
-                <td>{{row['router']}}</td>
-                <td>{{row['router_mfg']}}</td>
-                <td>{{row['router_ip']}}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <br>
-        <h3>MANAGEMENT IPMI NETWORK</h3>
-        <table><thead>
-        <th>MAC</th>
-        <th>IpAddress</th>
-        <th>speed</th>
-        <th>status</th>
-        <th>Vlan</th>
-        <th>Vlan Name</th>
-        <th>Switch</th>
-        <th>Router</th>
-        <th>Manufacturer</th>
-        <th>RouterIP</th>
-        </thead>
-           {% for row in entry['mgmt_data'] %}
-                <tr>
-                <td>{{row['mac']}}</td>
-                <td>{{row['primaryIpAddress']}}</td>
-                <td>{{row['speed']}}</td>
-                <td>{{row['status']}}</td>
-                <td>{{row['vlan']}}</td>
-                <td>{{row['vlanName']}}</td>
-                <td>{{row['switch']}}</td>
-                <td>{{row['router']}}</td>
-                <td>{{row['router_mfg']}}</td>
-                <td>{{row['router_ip']}}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <br>
-      <h3>VLANS BY INTERFACE</h3>
-        <table><thead>
-        <th>Interface</th>
-        <th>Vlan #</th>
-        <th>VlanName</th>
-        </thead>
-            {% for row in entry['trunkdata'] %}
-                <tr>
-                <td>{{row['interface']}}</td>
-                <td>{{row['vlanNumber']}}</td>
-                <td>{{row['vlanName']}}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <br>
-
-
-      <h3>BAREMETAL HARDWARE INFO</h3>
-        <table><thead>
-        <th>Type</th>
-        <th>Manufacturer</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Modify Date</th>
-        <th>Serial Number</th>
-        </thead>
-            {% for row in entry['hardware_data'] %}
-                <tr>
-                <td>{{row['devicetype']}}</td>
-                <td>{{row['manufacturer']}}</td>
-                <td>{{row['name']}}</td>
-                <td>{{row['description']}}</td>
-                <td>{{row['modifydate']}}</td>
-                <td>{{row['serialnumber']}}</td>
-                </tr>
-            {% endfor %}
-        </table>
+            </div>
+            </div>
+          </div>
+        </div>
     {% endfor %}
 {% endblock %}

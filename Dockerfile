@@ -9,5 +9,4 @@ EXPOSE 5000
 
 COPY . .
 
-CMD export FLASK_DEBUG=1
-CMD python baremetal-config-report.py
+CMD gunicorn -w 4 -b 0.0.0.0:5000 baremetal-config-report:app

@@ -18,7 +18,6 @@ def input():
     global username, apiKey, requestType
     username = request.args.get('username')
     apiKey = request.args.get('apiKey')
-    requestType = request.args.get('output')
 
     if username != None and apiKey != None:
         return redirect(url_for('baremetal-config-report.runReport'))
@@ -234,10 +233,7 @@ def runReport():
              'hardware_data': hardware_data
         })
 
-    if requestType == "json":
-        return json.dumps(output,indent=2)
-    else:
-        return render_template('report.html', output=output)
+    return render_template('report.html', output=output)
 
 app = Flask(__name__)
 app.register_blueprint(bp)
